@@ -3,10 +3,10 @@ def main(ctx):
 
   stages = [
     linux(ctx, 'amd64'),
-    linux(ctx, 'arm64'),
-    linux(ctx, 'arm'),
-    windows(ctx, '1903'),
-    windows(ctx, '1809'),
+    # linux(ctx, 'arm64'),
+    # linux(ctx, 'arm'),
+    # windows(ctx, '1903'),
+    # windows(ctx, '1809'),
   ]
 
   after = manifest(ctx) + gitter(ctx)
@@ -96,7 +96,7 @@ def testing(ctx):
     ],
     'trigger': {
       'ref': [
-        'refs/heads/master',
+        'refs/heads/v2',
         'refs/tags/**',
         'refs/pull/**',
       ],
@@ -106,12 +106,12 @@ def testing(ctx):
 def linux(ctx, arch):
   docker = {
     'dockerfile': 'docker/Dockerfile.linux.%s' % (arch),
-    'repo': 'plugins/downstream',
+    'repo': 'owncloudci/%s' % ctx.repo.name,
     'username': {
-      'from_secret': 'docker_username',
+      'from_secret': 'public_username',
     },
     'password': {
-      'from_secret': 'docker_password',
+      'from_secret': 'public_password',
     },
   }
 
@@ -183,7 +183,7 @@ def linux(ctx, arch):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/master',
+        'refs/heads/v2',
         'refs/tags/**',
         'refs/pull/**',
       ],
@@ -274,7 +274,7 @@ def windows(ctx, version):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/master',
+        'refs/heads/v2',
         'refs/tags/**',
       ],
     },
@@ -293,10 +293,10 @@ def manifest(ctx):
         'settings': {
           'auto_tag': 'true',
           'username': {
-            'from_secret': 'docker_username',
+            'from_secret': 'public_username',
           },
           'password': {
-            'from_secret': 'docker_password',
+            'from_secret': 'public_password',
           },
           'spec': 'docker/manifest.tmpl',
           'ignore_missing': 'true',
@@ -316,7 +316,7 @@ def manifest(ctx):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/master',
+        'refs/heads/v2',
         'refs/tags/**',
       ],
     },
@@ -347,7 +347,7 @@ def gitter(ctx):
     ],
     'trigger': {
       'ref': [
-        'refs/heads/master',
+        'refs/heads/v2',
         'refs/tags/**',
       ],
       'status': [
