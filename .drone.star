@@ -96,7 +96,7 @@ def testing(ctx):
     ],
     'trigger': {
       'ref': [
-        'refs/heads/v2',
+        'refs/heads/master',
         'refs/tags/**',
         'refs/pull/**',
       ],
@@ -183,7 +183,7 @@ def linux(ctx, arch):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/v2',
+        'refs/heads/master',
         'refs/tags/**',
         'refs/pull/**',
       ],
@@ -274,7 +274,7 @@ def windows(ctx, version):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/v2',
+        'refs/heads/master',
         'refs/tags/**',
       ],
     },
@@ -316,7 +316,7 @@ def manifest(ctx):
     'depends_on': [],
     'trigger': {
       'ref': [
-        'refs/heads/v2',
+        'refs/heads/master',
         'refs/tags/**',
       ],
     },
@@ -347,7 +347,7 @@ def gitter(ctx):
     ],
     'trigger': {
       'ref': [
-        'refs/heads/v2',
+        'refs/heads/master',
         'refs/tags/**',
       ],
       'status': [
