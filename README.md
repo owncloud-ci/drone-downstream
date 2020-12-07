@@ -1,3 +1,13 @@
+# Fork
+
+This fork is meant to provide working docker images until PRs are merged.
+
+Currently waiting for:
+
+- https://github.com/drone/drone-go/pull/59
+
+--------------------------------------------
+
 # drone-downstream
 
 [![Build Status](http://cloud.drone.io/api/badges/drone-plugins/drone-downstream/status.svg)](http://cloud.drone.io/drone-plugins/drone-downstream)
