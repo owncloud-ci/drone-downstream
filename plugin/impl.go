@@ -145,7 +145,14 @@ func (p *Plugin) Execute() error {
 						}
 
 						for _, b := range builds {
-							if b.Source == branch && b.Status == drone.StatusPassing {
+							var source string
+							if strings.HasPrefix(branch, "refs/") {
+								source = b.Ref
+							} else {
+								source = b.Source
+							}
+
+							if source == branch && b.Status == drone.StatusPassing {
 								build = b
 								break
 							}
