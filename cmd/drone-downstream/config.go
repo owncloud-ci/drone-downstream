@@ -47,6 +47,12 @@ func settingsFlags(settings *plugin.Settings) []cli.Flag {
 			Destination: &settings.Timeout,
 		},
 		&cli.BoolFlag{
+			Name:        "last",
+			Usage:       "Trigger last build (not neccesarily succesful)",
+			EnvVars:     []string{"PLUGIN_LAST"},
+			Destination: &settings.Last,
+		},
+		&cli.BoolFlag{
 			Name:        "last-successful",
 			Usage:       "Trigger last successful build",
 			EnvVars:     []string{"PLUGIN_LAST_SUCCESSFUL"},

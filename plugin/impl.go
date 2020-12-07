@@ -28,6 +28,7 @@ type Settings struct {
 	Token          string
 	Wait           bool
 	Timeout        time.Duration
+	Last           bool
 	LastSuccessful bool
 	Params         cli.StringSlice
 	ParamsEnv      cli.StringSlice
@@ -103,7 +104,7 @@ func (p *Plugin) Execute() error {
 			if branch == "" {
 				return fmt.Errorf("build no or branch must be mentioned for deploy, format repository@build/branch")
 			}
-			if _, err := strconv.Atoi(branch); err != nil && !p.settings.LastSuccessful {
+			if _, err := strconv.Atoi(branch); err != nil && !p.settings.Last && !p.settings.LastSuccessful {
 				return fmt.Errorf("for deploy build no must be numeric only " +
 					" or for branch deploy last_successful should be true," +
 					" format repository@build/branch")
@@ -131,7 +132,12 @@ func (p *Plugin) Execute() error {
 				// first handle the deploy trigger
 				if len(p.settings.Deploy) != 0 {
 					var build *drone.Build
-					if p.settings.LastSuccessful {
+					if p.settings.Last && !p.settings.LastSuccessful {
+						build, err = client.BuildLast(owner, name, branch)
+						if err != nil {
+							return fmt.Errorf("unable to get last build for %s: %#v", entry, err)
+						}
+					} else if p.settings.LastSuccessful {
 						// Get the last successful build of branch
 						builds, err := client.BuildList(owner, name, drone.ListOptions{})
 						if err != nil {
