@@ -1,4 +1,4 @@
-image: owncloud-ci/drone-downstream:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+image: owncloudci/drone-downstream:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 
 {{#if build.tags}}
 tags:
@@ -8,7 +8,7 @@ tags:
 {{/if}}
 
 manifests:
-  - image: owncloud-ci/drone-downstream:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+  - image: owncloudci/drone-downstream:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
       os: linux
