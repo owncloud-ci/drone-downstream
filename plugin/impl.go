@@ -15,8 +15,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/drone/drone-go/drone"
 	"github.com/joho/godotenv"
+	"github.com/owncloud-ci/drone-go/drone"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/oauth2"
 )
